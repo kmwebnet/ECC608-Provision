@@ -1,12 +1,13 @@
 # Microchip Secure Element Tools
 
 These tools are used to set up an example chain of trust ecosystem for use with
-Microchip ATECC508A and ATECC608A parts. Included are utilities to create the
-ecosystem keys and certificates.
+Microchip ATECC508A and ATECC608A parts.   
+Included are utilities to create the ecosystem keys and certificates.
 
 ## Dependencies
 
-Python scripts will require python 3 to be installed. Once python is installed
+Python scripts will require python 3 to be installed.   
+Once python is installed
 install the requirements (from the path of this file):
 
 ```
@@ -16,7 +17,8 @@ install the requirements (from the path of this file):
 ## Set up a Certificate Ecosystem
 
 The first step is to set up a certificate chain that mirrors how a secure iot
-ecosystem would be configured. For this we'll create a dummy root certificate
+ecosystem would be configured.  
+For this we'll create a dummy root certificate
 authority (normally this would be handled by a third party, or an internal
 PKI system) and an intermediate (Signing) certificate authority.
 
@@ -30,7 +32,7 @@ common name:<your own common name>
 ```
 
 ### Create the Signing CA
-This command interactively enters the organization name and common name, and creates the related certificate and private key.
+This command interactively enters the organization name and common name, and creates the related certificate and private key.  
 make sure not to set the same name as accepted by "create_root.py".
 ```
 > create_signer.py
@@ -53,7 +55,7 @@ MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEojEQk85EaT1RU3Ip5SddaSqB5/Wm
 2) Save this key as public_key.pem for use in the device certificate creation
 
 3) Run the create_device script:
-This command interactively enters the organization name and common name, and creates the related certificate and private key.
+This command interactively enters the organization name and common name, and creates the related certificate and private key.  
 you may use device unique ID output from [ECC608-Configure](https://github.com/kmwebnet/ECC608-Configure) program as device common name.
 ```
 > create_device.py --deveicekey public_key.pem
