@@ -67,17 +67,17 @@ This performs the certificate creation and signing process but does not load the
 certificates into the device (provisioning).
 
 ### Create certificate definition file
-
+```
 > cert2certdef.py --signer-cert signer-ca.crt >> cert_chain.c
 > cert2certdef.py --device-cert device.crt >> cert_chain.c
-
+```
 This creates the file that is used by provision.c as certificate definitions to save the generated
 certificates into the secure element. 
 
 ### Export the provision.h file
-
+```
 > export_header.py
-
+```
 This creates the file that is used by provision.c to save the generated
 certificates into the secure element. 
 
