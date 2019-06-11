@@ -5,14 +5,14 @@ after all process done, ATECC608 will be ready to use the certificates.
 
 # Requirements
 
-  Platformio with VS Code environment.
+  Platformio with VS Code environment.  
   install "Espressif 32" platform definition on Platformio
 
 # Environment reference
   
   Espressif ESP32-DevkitC  
-  this project initialize both of I2C 0,1 port, and the device on I2C port 0 is absent.
-  pin assined as below:
+  this project initialize both of I2C 0,1 port, and the device on I2C port 0 is absent.  
+  pin assined as below:  
 
 
       I2C 0 SDA GPIO_NUM_18
@@ -25,17 +25,17 @@ after all process done, ATECC608 will be ready to use the certificates.
 
 # Usage
 
-you need to change a serial port number which actually connected to ESP32 in platformio.ini.
+you need to change a serial port number which actually connected to ESP32 in platformio.ini.  
 
 # Run this project
 
-At first, you need to create self-signed CA chain by using python scripts step-by-step in "scripts" folder for test purpose.  
-the scripts will generate "cert_chain.c" and "provision.h" which is mandatory to compile main C source code.  
-You need to place 2 of them in "src" folder and,then execute "Upload" on Platformio. 
+At first, you need to create self-signed CA chain by using python scripts step-by-step in "scripts" folder for test purpose.    
+the scripts will generate "cert_chain.c" and "provision.h" which is mandatory to compile main C source code.    
+You need to place 2 of them in "src" folder and,then execute "Upload" on Platformio.   
 
 # Result
 
-If you run this project with success, you can get the results on serial console as follows:
+If you run this project with success, you can get the results on serial console as follows:  
 
 ```
 SPIWP:0xee
