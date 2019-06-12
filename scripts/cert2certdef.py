@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import binascii
 import string
 import datetime
@@ -10,7 +11,7 @@ from pyasn1.type import univ
 def main():
     # Create argument parser to document script use
     parser = argparse.ArgumentParser(description='Generate atcacert_def_t structure from sample certificate.')
-    group = parser.add_mutually_exclusive_group(required=True)
+    group = parser.add_argument_group('group')
     group.add_argument(
         '--signer-cert',
         dest='signer_cert_filename',
@@ -37,12 +38,14 @@ def main():
     if args.signer_cert_filename is not None:
         cert_der = pem.readPemFromFile(open(args.signer_cert_filename))
         print(gen_cert_def_c_signer(cert_der))
-        return
+        with open("cert_chain.c", mode='w', encoding="utf-8") as f:
+            f.write(gen_cert_def_c_signer(cert_der))
 
     if args.device_cert_filename is not None:
         cert_der = pem.readPemFromFile(open(args.device_cert_filename))
         print(gen_cert_def_c_device(cert_der))
-        return
+        with open("cert_chain.c", mode='a', encoding="utf-8") as f:
+            f.write(gen_cert_def_c_device(cert_der))
 
     if args.device_csr_filename is not None:
         csr_der = pem.readPemFromFile(
@@ -51,6 +54,7 @@ def main():
             endMarker='-----END CERTIFICATE REQUEST-----')
         print(gen_cert_def_c_device_csr(csr_der))
         return
+    return
 
 def gen_cert_def_c_signer(cert_der):
     cert = decoder.decode(cert_der, asn1Spec=rfc2459.Certificate())[0]
@@ -258,7 +262,7 @@ def cert_signer_id_offset_length(cert, name):
     cert_mod = decoder.decode(cert_der, asn1Spec=rfc2459.Certificate())[0]
     cert_mod['tbsCertificate'][name] = decoder.decode(bytes(name_der))[0]
 
-    return {'offset':diff_offset(cert_der, encoder.encode(cert_mod)), 'length':4}
+    return {'offset':0, 'length':0}
 
 def cert_time_offset_length(cert, name):
     cert_der = encoder.encode(cert)

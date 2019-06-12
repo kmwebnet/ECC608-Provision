@@ -68,11 +68,9 @@ certificates into the device (provisioning).
 
 ### Create certificate definition file
 ```
-> cert2certdef.py --signer-cert signer-ca.crt >> cert_chain.c
-> cert2certdef.py --device-cert device.crt >> cert_chain.c
+> cert2certdef.py --signer-cert signer-ca.crt --device-cert device.crt
 ```
-This creates the file that is used by provision.c as certificate definitions to save the generated
-certificates into the secure element. 
+This creates the "cert_chain.c" file that is used by provision.c as certificate definitions to save the generated certificates into the secure element. 
 
 ### Export the provision.h file
 ```
