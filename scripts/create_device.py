@@ -132,8 +132,13 @@ def create_device(device_file, device_key_file, signer_file, signer_key_file, ro
         x509.AuthorityKeyIdentifier.from_issuer_subject_key_identifier(issuer_ski),
         critical=False)
 
-    # Sign certificate 
-    device_cert = builder.sign(private_key=signer_ca_priv_key, algorithm=hashes.SHA256(), backend=be)
+    # Sign certificate with longest R & S pattern 
+    while True: 
+        device_cert = builder.sign(private_key=signer_ca_priv_key, algorithm=hashes.SHA256(), backend=be)
+        cert = decoder.decode(device_cert.public_bytes(encoding=serialization.Encoding.DER), asn1Spec=rfc2459.Certificate())[0]
+        info = cert_sig_offset_length(cert)
+        if info['length'] == 75:
+            break
 
     # Save certificate for reference
     print('    Save Device Certificate to %s' % device_file)
