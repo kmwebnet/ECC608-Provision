@@ -98,7 +98,7 @@ def create_signer(signer_file, signer_key_file, root_file, root_key_file):
 
     issuer_ski = root_ca_cert.extensions.get_extension_for_class(x509.SubjectKeyIdentifier)
     builder = builder.add_extension(
-        x509.AuthorityKeyIdentifier.from_issuer_subject_key_identifier(issuer_ski),
+        x509.AuthorityKeyIdentifier.from_issuer_subject_key_identifier(issuer_ski.value),
         critical=False)
 
     # Sign signer certificate with root
